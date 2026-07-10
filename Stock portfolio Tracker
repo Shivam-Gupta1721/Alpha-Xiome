@@ -1,1 +1,67 @@
+import random
 
+# List of predefined words
+word_list = ["python", "apple", "computer", "school", "science"]
+
+# Select a random word
+word = random.choice(word_list)
+
+# Create blank spaces for the word
+display = ["_"] * len(word)
+
+# Store guessed letters
+guessed_letters = []
+
+# Number of incorrect attempts allowed
+attempts = 6
+
+print("=" * 40)
+print("       WELCOME TO HANGMAN GAME")
+print("=" * 40)
+print("Guess the hidden word.")
+print("You have only 6 incorrect attempts.")
+print()
+
+# Game Loop
+while attempts > 0 and "_" in display:
+
+    print("\nWord: ", " ".join(display))
+    print("Guessed Letters:", " ".join(guessed_letters))
+    print("Remaining Attempts:", attempts)
+
+    guess = input("Enter a letter: ").lower()
+
+    # Check valid input
+    if len(guess) != 1 or not guess.isalpha():
+        print("Please enter only one alphabet.")
+        continue
+
+    # Check if already guessed
+    if guess in guessed_letters:
+        print("You already guessed this letter.")
+        continue
+
+    guessed_letters.append(guess)
+
+    # Check if letter is in the word
+    if guess in word:
+        print("Correct!")
+
+        for i in range(len(word)):
+            if word[i] == guess:
+                display[i] = guess
+    else:
+        print("Wrong!")
+        attempts -= 1
+
+# Result
+print("\n" + "=" * 40)
+
+if "_" not in display:
+    print("Congratulations! You Won!")
+    print("The word was:", word)
+else:
+    print("Game Over!")
+    print("The correct word was:", word)
+
+print("=" * 40)
