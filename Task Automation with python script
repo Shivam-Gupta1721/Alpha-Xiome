@@ -1,1 +1,34 @@
+import re
 
+# Step 1: Create a sample text file
+sample_text = """
+Hello!
+
+You can contact us at support@gmail.com
+For business queries: info@yahoo.com
+Personal Email: parth123@outlook.com
+
+Thank You!
+"""
+
+with open("input.txt", "w") as file:
+    file.write(sample_text)
+
+# Step 2: Read the text file
+with open("input.txt", "r") as file:
+    content = file.read()
+
+# Step 3: Extract email addresses
+emails = re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", content)
+
+# Step 4: Save emails to another file
+with open("emails.txt", "w") as file:
+    for email in emails:
+        file.write(email + "\n")
+
+# Step 5: Display result
+print("Extracted Email Addresses:")
+for email in emails:
+    print(email)
+
+print("\nEmails have been saved to 'emails
